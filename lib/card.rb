@@ -15,7 +15,7 @@ class Card
     valid_suits = [:hearts, :spades, :clubs, :diamonds]
       if valid_suits.include?(suit) == false
       raise ArgumentError.new("Invalid Suit")
-    end
+      end
   end
 
   def value_error(value)
