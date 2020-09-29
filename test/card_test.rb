@@ -26,6 +26,10 @@ describe Card do
     it "to_s returns a readable String value logically for values 2-10" do
       # Test to ensure that to_s works for cards values 2-10
       # for example:  "2 of diamonds"
+      card_1 = Card.new(2, :diamonds)
+      card_2 = Card.new(4, :spades)
+      expect(card_2.to_s).must_equal "4 of spades"
+      expect(card_1.to_s).must_equal "2 of diamonds"
     end
 
     it "to_s returns a readable String value for Ace, Jack, Queen, King" do
@@ -36,10 +40,20 @@ describe Card do
       # (Consider writing a helper method!)
       #
       # For reference:
-      #  1: Ace
-      #  11: Jack
-      #  12: Queen
-      #  13: King
+      # Arrange # Act # Assert
+      face_cards = {
+          1 => "Ace",
+         11 => "Jack",
+         12 => "Queen",
+         13 => "King"
+      }
+      face_cards.each do |k, face|
+      card_1 = Card.new(k, :diamonds)
+      card_2 = Card.new(k, :clubs)
+
+      expect(card_1.to_s).must_equal "#{face} of diamonds"
+      expect(card_2.to_s).must_equal "#{face} of clubs"
+      end
     end
   end
 
@@ -47,12 +61,23 @@ describe Card do
 
     it "Can retrieve the value of the card using a `.value`." do
       # ensure that `.value works as expected`
+       [:hearts, :spades, :clubs, :diamonds].each do |suit|
+         (1..13).each do |value|
+          card = Card.new(value, suit)
+          expect(card.value).must_equal value
+         end
+      end
     end
 
-    it "Can retrieve the value of the card using a `.suit`." do
+    it "     expect(card).must_be_instance_of Card               Can retrieve the value of the card using a `.suit`." do
       # ensure that `.suit works as expected returning the symbol of the suit`
-
+      [:hearts, :spades, :clubs, :diamonds].each do |suit|
+        (1..13).each do |value|
+           card = Card.new(value, suit)
+           expect(card.suit).must_equal suit
+        end
+      end
     end
   end
-
 end
+
